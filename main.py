@@ -13,7 +13,7 @@ __number_of_weeks = 6
 def parse_input_args():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("-h", "--hostname", help="Host name")
+    parser.add_argument("--hostname", help="Host name")
     parser.add_argument("-u", "--username", help="User name")
     parser.add_argument("-p", "--password", help="Password")
 
