@@ -1,12 +1,14 @@
 from jira import JIRA
 
+
 class JiraAccess:
     def __init__(self, hostname, username, password):
         self.jira = JIRA(hostname, basic_auth=(username, password))
 
     @staticmethod
     def has_field(issue, field_name):
-        return hasattr(issue.fields, field_name) and getattr(issue.fields, field_name) is not None
+        return hasattr(issue.fields, field_name) and getattr(
+            issue.fields, field_name) is not None
 
     @staticmethod
     def get_story_points(issue):
@@ -34,15 +36,20 @@ class JiraAccess:
 
     def get_sprints_data(self, board_id, text_in_board_name):
         sprints = self.jira.sprints(board_id)
-        sprints_list = list(filter(lambda x: f"{text_in_board_name}" in x.name, sprints))[-6:]
+        sprints_list = list(
+            filter(lambda x: f"{text_in_board_name}" in x.name, sprints))[-6:]
         for s in sprints_list:
             sprint_issues = self.jira.search_issues(f"sprint = {s.id}")
-            sprint_bugs = self.jira.search_issues(f"sprint = {s.id} AND issueType = BUG")
-            return SprintData(s.id, s.name, -1, len(sprint_bugs), len(sprint_issues))
+            sprint_bugs = self.jira.search_issues(
+                f"sprint = {s.id} AND issueType = BUG")
+            return SprintData(s.id, s.name, -1,
+                              len(sprint_bugs), len(sprint_issues))
 
     # TODO: @cache results
     def get_resolved_in_week(self, filter_id, week_index):
-        resolved_issues_in_week_jql = JiraAccess.get_jql_field_and_week(filter_id, "resolved", week_index)
-        resolved_issues_in_week = self.jira.search_issues(resolved_issues_in_week_jql)
+        resolved_issues_in_week_jql = JiraAccess.get_jql_field_and_week(
+            filter_id, "resolved", week_index)
+        resolved_issues_in_week = self.jira.search_issues(
+            resolved_issues_in_week_jql)
 
         return resolved_issues_in_week
