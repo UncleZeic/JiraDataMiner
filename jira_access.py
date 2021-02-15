@@ -1,6 +1,6 @@
 from jira import JIRA
 
-from SprintData import SprintData
+from sprint_data import SprintData
 
 
 class JiraAccess:
