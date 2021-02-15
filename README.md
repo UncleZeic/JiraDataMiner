@@ -34,3 +34,44 @@ Run the miner
 ```sh
 $ make run
 ```
+
+### Use venv
+It's also possible of using ``venv``, some would argue it's even recommended! 
+By default there is support for creating a virtual environment called ``dev``. Run the following to create it:
+
+```sh
+$ make env
+```
+
+Now that it's created, let's activate it. Note that once created it does not need to be re-created unless for some reason it got deleted.
+
+```sh
+$ source dev/bin/activate
+$ source credentials.env
+```
+
+The above command will activate the ``dev`` virtual environment and source the ``credentials.env`` file in this environment.
+Run the following to install required dependencies:
+
+```sh
+$ make pip
+```
+
+Please note that the above command needs to be run only when the env is newly created, not every time after it has been activated.
+Run the miner as usual:
+
+```sh
+$ make run
+```
+
+Deactivate the virtual environment like so:
+
+```sh
+$ deactivate
+```
+
+If for any reason the ``dev`` virtual env needs to be deleted run the following:
+
+```sh
+$ make clean
+```
