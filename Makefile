@@ -5,4 +5,5 @@ run:
 	@echo "Running on ${VERSION} with revision ${REVISION}"
 	@./main.py --hostname=${JIRA_HOSTNAME} --username=${JIRA_USERNAME} --password=${JIRA_PASSWORD}
 
-
+help:
+	@./main.py -h
