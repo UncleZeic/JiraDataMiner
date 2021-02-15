@@ -18,4 +18,15 @@ This is a lite poc project dealing with Jira.
 |*password*         | Password for the said user  |      |
 
 #### Run
-Fill in here...
+Before starting the miner, you need to fill in the proper credentials. Have a look in the ``credentials.env`` file and edit it accordingly.
+Please note that local changes of your ``credentials.env`` file **must** not be commited.
+
+```sh
+$ source ./credentials.env
+```
+
+Run the miner
+
+```sh
+$ make run
+```
