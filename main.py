@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-import plotly.graph_objects as go
+import plotly.express as px
+import pandas as pd
 import argparse
 
 from sprint.jira_access import JiraAccess
@@ -39,10 +40,12 @@ def get_resolved_story_points(j_a, board_filter_id, number_of_weeks):
     return resolved_story_points_past_weeks
 
 
-def go_figure(stories_points_list):
-    fig = go.Figure()
-    fig.add_trace(go.Bar(y=stories_points_list))
-    fig.update_layout(title='Velocity')
+def px_figure(story_points_list):
+    weeks = list(range(-len(story_points_list), 0))
+    df = pd.DataFrame(dict(weeks=weeks, story_points=story_points_list))
+    fig = px.scatter(x=df.weeks, y=df.story_points, trendline="lowess")
+
+    fig.update_layout(title='Forecast')
     fig.show()
 
 
@@ -53,5 +56,5 @@ if __name__ == '__main__':
 
     stories_points_list = get_resolved_story_points(
         jira_acc, args.board_filter_id, args.weeks)
-
-    go_figure(stories_points_list)
+    # stories_points_list = [43, 42, 172, 78, 30, 31, 22, 32, 11, 8, 11] # Test Data
+    px_figure(stories_points_list)
