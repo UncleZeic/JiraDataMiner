@@ -3,9 +3,11 @@ This is a lite poc project dealing with Jira.
 
 ## Prereqs:
 
- 1. Python3
- 2. Plotly
- 3. Jira
+ * Python3
+ * All other dependencies are fetched by running the following:
+  ```sh
+  $ make pip
+  ```
 
 ## Usage
 
