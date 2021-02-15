@@ -38,14 +38,14 @@ $ make run
 ```
 
 ### Use venv
-It's also possible of using ``venv``, some would argue it's even recommended! 
-By default there is support for creating a virtual environment called ``dev``. Run the following to create it:
+It's also possible to use ``venv``, some would argue it's even recommended! 
+By default, there is support for creating a virtual environment called ``dev``. Run the following to create it:
 
 ```sh
 $ make env
 ```
 
-Now that it's created, let's activate it. Note that once created it does not need to be re-created unless for some reason it got deleted.
+Now that it's created, let's activate it. Note that once created, it does not need to be re-created unless for some reason it got deleted.
 
 ```sh
 $ source dev/bin/activate
@@ -72,7 +72,7 @@ Deactivate the virtual environment like so:
 $ deactivate
 ```
 
-If for any reason the ``dev`` virtual env needs to be deleted run the following:
+If for any reason the ``dev`` virtual env needs to be deleted - run the following:
 
 ```sh
 $ make clean
