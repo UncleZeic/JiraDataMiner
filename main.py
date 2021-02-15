@@ -4,11 +4,6 @@ import argparse
 
 from sprint.jira_access import JiraAccess
 
-__atlas_board_filter_id = 40443
-__atlas_board_id = 1192
-__project_name = "AAA"
-__number_of_weeks = 6
-
 
 def parse_input_args():
     parser = argparse.ArgumentParser()
@@ -16,16 +11,26 @@ def parse_input_args():
     parser.add_argument("--hostname", help="Host name")
     parser.add_argument("-u", "--username", help="User name")
     parser.add_argument("-p", "--password", help="Password")
+    parser.add_argument(
+        "--board-filter-id",
+        help="Board filter id",
+        default=40443)
+    parser.add_argument("--board-id", help="Board id", default=1192)
+    parser.add_argument("--project", help="Project name", default="AAA")
+    parser.add_argument(
+        "--weeks",
+        help="Number of weeks to retrieve data for",
+        default=6)
 
     return parser.parse_args()
 
 
-def get_resolved_story_points(j_a):
+def get_resolved_story_points(j_a, board_filter_id, number_of_weeks):
     resolved_story_points_past_weeks = []
 
-    for wi in range(-1, -__number_of_weeks, -1):
+    for wi in range(-1, -number_of_weeks, -1):
         resolved_issues_in_week = j_a.get_resolved_in_week(
-            __atlas_board_filter_id, wi)
+            board_filter_id, wi)
 
         resolved_story_points_in_week = sum(j_a.get_story_points(
             issue) or 0 for issue in resolved_issues_in_week)
@@ -45,6 +50,8 @@ if __name__ == '__main__':
     args = parse_input_args()
 
     jira_acc = JiraAccess(args.hostname, args.username, args.password)
-    resolved_stories = get_resolved_story_points(jira_acc)
+
+    stories = get_resolved_story_points(
+        jira_acc, args.board_filter_id, args.weeks)
 
     go_figure(stories)
