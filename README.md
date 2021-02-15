@@ -13,9 +13,13 @@ This is a lite poc project dealing with Jira.
  
 | Option        | About                                             | Default       | Required       |
 | ------------- |:--------------------------------------------------|:-------------:|:--------------:|
-|*hostname*         | Jira hostname  |  |
-|*username*    | Username for the jira login  |  |
-|*password*         | Password for the said user  |      |
+|*hostname*         | Jira hostname  |  | x
+|*username*    | Username for the jira login  |  | x
+|*password*         | Password for the said user  |      | x
+|*board-filter-id*         | Board filter id  |      | x
+|*board-id*         | Board id  |      |
+|*project*         | Project name  |      |
+|*weeks*         | Number of weeks to retrieve data for  |  6    | x
 
 #### Run
 Before starting the miner, you need to fill in the proper credentials. Have a look in the ``credentials.env`` file and edit it accordingly.
