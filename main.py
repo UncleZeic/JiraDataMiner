@@ -19,7 +19,7 @@ def parse_input_args():
     parser.add_argument("--project", help="Project name", default="AAA")
     parser.add_argument(
         "--weeks",
-        help="Number of weeks to retrieve data for",
+        help="Number of weeks to retrieve data for", type=int,
         default=6)
 
     return parser.parse_args()
@@ -39,10 +39,10 @@ def get_resolved_story_points(j_a, board_filter_id, number_of_weeks):
     return resolved_story_points_past_weeks
 
 
-def go_figure(stories):
+def go_figure(stories_points_list):
     fig = go.Figure()
-    fig.add_trace(go.Bar(y=stories))
-    fig.update_layout(title='Hello Figure')
+    fig.add_trace(go.Bar(y=stories_points_list))
+    fig.update_layout(title='Velocity')
     fig.show()
 
 
@@ -51,7 +51,7 @@ if __name__ == '__main__':
 
     jira_acc = JiraAccess(args.hostname, args.username, args.password)
 
-    stories = get_resolved_story_points(
+    stories_points_list = get_resolved_story_points(
         jira_acc, args.board_filter_id, args.weeks)
 
-    go_figure(stories)
+    go_figure(stories_points_list)
