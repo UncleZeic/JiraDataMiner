@@ -1,12 +1,22 @@
 import plotly.graph_objects as go
+import argparse
 
 from jiraAccess import JiraAccess
-from setup import get_credentials
 
+def parse_input_args():
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument("-h", "--hostname", help="Host name")
+    parser.add_argument("-u", "--username", help="User name")
+    parser.add_argument("-p", "--password", help="Password")
+
+    return parser.parse_args()
 
 if __name__ == '__main__':
-    credential = get_credentials()
-    jiraAccess = JiraAccess(credential.hostname, credential.username, credential.password)
+    args = parse_args()
+
+    jiraAccess = JiraAccess(args.hostname, args.username, args.password)
+
     atlas_board_filter_id = 40443
     atlasBoardId = 1192
     projectName = "AAA"
