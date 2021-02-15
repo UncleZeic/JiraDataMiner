@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import plotly.graph_objects as go
 import argparse
 
@@ -20,7 +21,7 @@ def parse_input_args():
 
 
 if __name__ == '__main__':
-    args = parse_args()
+    args = parse_input_args()
 
     jiraAccess = JiraAccess(args.hostname, args.username, args.password)
     resolved_story_points_past_weeks = []
