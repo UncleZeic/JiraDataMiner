@@ -1,8 +1,5 @@
 from jira import JIRA
 
-from sprint_data import SprintData
-
-
 class JiraAccess:
     def __init__(self, hostname, username, password):
         self.jira = JIRA(hostname, basic_auth=(username, password))

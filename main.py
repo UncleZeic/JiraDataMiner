@@ -2,7 +2,7 @@
 import plotly.graph_objects as go
 import argparse
 
-from jira_access import JiraAccess
+from sprint.jira_access import JiraAccess
 
 __atlas_board_filter_id = 40443
 __atlas_board_id = 1192
