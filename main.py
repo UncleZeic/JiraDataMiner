@@ -3,6 +3,12 @@ import argparse
 
 from jiraAccess import JiraAccess
 
+__atlas_board_filter_id = 40443
+__atlas_board_id = 1192
+__project_name = "AAA"
+__number_of_weeks = 6
+
+
 def parse_input_args():
     parser = argparse.ArgumentParser()
 
@@ -12,24 +18,22 @@ def parse_input_args():
 
     return parser.parse_args()
 
+
 if __name__ == '__main__':
     args = parse_args()
 
     jiraAccess = JiraAccess(args.hostname, args.username, args.password)
+    resolved_story_points_past_weeks = []
 
-    atlas_board_filter_id = 40443
-    atlasBoardId = 1192
-    projectName = "AAA"
+    for wi in range(-1, -__number_of_weeks, -1):
+        resolved_issues_in_week = jiraAccess.get_resolved_in_week(
+            __atlas_board_filter_id, wi)
 
-    numberOfWeeks = 6
-    resolvedStoryPointsPastWeeks = []
-    for wi in range(-1, -numberOfWeeks, -1):
-        resolved_issues_in_week = jiraAccess.get_resolved_in_week(atlas_board_filter_id, wi)
-
-        resolvedStoryPointsInWeek = sum(JiraAccess.get_story_points(issue) or 0 for issue in resolved_issues_in_week)
-        resolvedStoryPointsPastWeeks.append(resolvedStoryPointsInWeek)
+        resolvedStoryPointsInWeek = sum(JiraAccess.get_story_points(
+            issue) or 0 for issue in resolved_issues_in_week)
+        resolved_story_points_past_weeks.append(resolvedStoryPointsInWeek)
 
     fig = go.Figure()
-    fig.add_trace(go.Bar(y=resolvedStoryPointsPastWeeks))
+    fig.add_trace(go.Bar(y=resolved_story_points_past_weeks))
     fig.update_layout(title='Hello Figure')
     fig.show()
